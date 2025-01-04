@@ -22,7 +22,7 @@ public class BookStoreTests extends BaseSetUp {
 
         Assertions.assertNotNull(response, "Response should not be null");
         Assertions.assertEquals(response.statusCode(), 200, "Response is not successfully!");
-        System.out.println("Get All Books Response: " + response.getBody().asString());
+        System.out.println("Get All Books Response: " + response.asPrettyString());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class BookStoreTests extends BaseSetUp {
         Assertions.assertEquals(response.statusCode(), 200, "Response is not successfully!");
 
         System.out.println("Response status code: " + response.getStatusCode());
-        System.out.println("Response body: " + response.getBody().asString());
+        System.out.println("Response body: " + response.asPrettyString());
     }
 
 }
