@@ -1,7 +1,6 @@
 package clients;
 
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 
@@ -11,8 +10,8 @@ public class BookStoreApi extends BaseApi {
     private final String BOOKS_ENDPOINT = BOOKSTORE_ROOT + "/Books";
     private final String BOOK_ENDPOINT = BOOKSTORE_ROOT + "/Book";
 
-    public BookStoreApi(RequestSpecification requestSpec) {
-        super(requestSpec);
+    public BookStoreApi() {
+        super();
     }
 
     public Response getAllBooks() {
