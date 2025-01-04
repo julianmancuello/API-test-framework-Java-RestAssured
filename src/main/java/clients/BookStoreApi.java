@@ -16,7 +16,7 @@ public class BookStoreApi extends BaseApi {
 
     public Response getAllBooks() {
         return given()
-                .spec(requestSpec)
+                .spec(getRequestSpec())
                 .when()
                 .get(BOOKS_ENDPOINT)
                 .then()
@@ -24,7 +24,7 @@ public class BookStoreApi extends BaseApi {
     }
 
     public Response getBookByISBN(String isbn) {
-        return requestSpec
+        return getRequestSpec()
                 .param("ISBN", isbn)
                 .when()
                 .get(BOOK_ENDPOINT)

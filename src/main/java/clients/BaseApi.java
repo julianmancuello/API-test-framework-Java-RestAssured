@@ -6,13 +6,25 @@ import io.restassured.specification.RequestSpecification;
 public class BaseApi {
 
     private final String BASE_URI = "https://bookstore.toolsqa.com";
-    protected RequestSpecification requestSpec;
+    private RequestSpecification requestSpec;
+    private String token;
 
     public BaseApi() {
         requestSpec = new RequestSpecBuilder()
                 .setBaseUri(BASE_URI)
                 .setContentType("application/json")
                 .build();
+    }
+
+    public RequestSpecification getRequestSpec(){
+        return requestSpec;
+    }
+
+    public RequestSpecification getRequestSpec(boolean authRequired){
+        if(authRequired){
+            return requestSpec.header("Authorization", "Bearer " + token);
+        }
+        return requestSpec;
     }
 }
 
