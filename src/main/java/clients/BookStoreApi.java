@@ -24,7 +24,8 @@ public class BookStoreApi extends BaseApi {
     }
 
     public Response getBookByISBN(String isbn) {
-        return getRequestSpec()
+        return given()
+                .spec(getRequestSpec())
                 .param("ISBN", isbn)
                 .when()
                 .get(BOOK_ENDPOINT)
