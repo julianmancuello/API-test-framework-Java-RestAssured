@@ -1,6 +1,7 @@
 package clients;
 
 import io.restassured.response.Response;
+import models.BookStore;
 
 import static io.restassured.RestAssured.given;
 
@@ -14,13 +15,12 @@ public class BookStoreApi extends BaseApi {
         super();
     }
 
-    public Response getAllBooks() {
+    public BookStore getAllBooks() {
         return given()
                 .spec(getRequestSpec())
                 .when()
                 .get(BOOKS_ENDPOINT)
-                .then()
-                .extract().response();
+                .as(BookStore.class);
     }
 
     public Response getBookByISBN(String isbn) {

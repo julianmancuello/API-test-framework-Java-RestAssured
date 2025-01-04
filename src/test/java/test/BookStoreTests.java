@@ -2,6 +2,7 @@ package test;
 
 import clients.BookStoreApi;
 import io.restassured.response.Response;
+import models.BookStore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +19,12 @@ public class BookStoreTests extends BaseSetUp {
 
     @Test
     public void testGetAllBooksSuccessfully() {
-        Response response = bookStoreApi.getAllBooks();
+        BookStore bookStore = bookStoreApi.getAllBooks();
 
-        Assertions.assertNotNull(response, "Response should not be null");
-        Assertions.assertEquals(response.statusCode(), 200, "Response is not successfully!");
-        System.out.println("Get All Books Response: " + response.asPrettyString());
+        System.out.println(bookStore.getBooks().get(0).getTitle());
+        Assertions.assertEquals(bookStore.getBooks().get(0).getIsbn(), "9781449325862");
+        //Assertions.assertEquals(bookStore.statusCode(), 200, "Response is not successfully!");
+        //System.out.println("Get All Books Response: " + bookStore.asPrettyString());
     }
 
     @Test
