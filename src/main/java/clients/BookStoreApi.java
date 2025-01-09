@@ -1,6 +1,6 @@
 package clients;
 
-import io.restassured.response.Response;
+import models.Book;
 import models.BookStore;
 
 import static io.restassured.RestAssured.given;
@@ -20,17 +20,18 @@ public class BookStoreApi extends BaseApi {
                 .spec(getRequestSpec())
                 .when()
                 .get(BOOKS_ENDPOINT)
-                .as(BookStore.class);
+                .then().statusCode(200)
+                .extract().body().as(BookStore.class);
     }
 
-    public Response getBookByISBN(String isbn) {
+    public Book getBookByISBNSuccessful(String isbn) {
         return given()
                 .spec(getRequestSpec())
                 .param("ISBN", isbn)
                 .when()
                 .get(BOOK_ENDPOINT)
-                .then()
-                .extract().response();
+                .then().statusCode(200)
+                .extract().body().as(Book.class);
     }
 
 }

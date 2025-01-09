@@ -2,6 +2,7 @@ package test;
 
 import clients.BookStoreApi;
 import io.restassured.response.Response;
+import models.Book;
 import models.BookStore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,20 +25,17 @@ public class BookStoreTests extends BaseSetUp {
         System.out.println(bookStore.getBooks().get(0).getTitle());
         System.out.println(bookStore.getBooks().get(0).getPublishDate());
         Assertions.assertEquals(bookStore.getBooks().get(0).getIsbn(), "9781449325862");
-        //Assertions.assertEquals(bookStore.statusCode(), 200, "Response is not successfully!");
-        //System.out.println("Get All Books Response: " + bookStore.asPrettyString());
     }
 
     @Test
     public void testGetBookByIsbnSuccessfully() {
         String isbn = "9781449325862";
-        Response response = bookStoreApi.getBookByISBN(isbn);
+        Book book = bookStoreApi.getBookByISBNSuccessful(isbn);
 
-        Assertions.assertNotNull(response, "Response should not be null");
-        Assertions.assertEquals(response.statusCode(), 200, "Response is not successfully!");
-
-        System.out.println("Response status code: " + response.getStatusCode());
-        System.out.println("Response body: " + response.asPrettyString());
+        System.out.println(book.getTitle());
+        System.out.println(book.getPublishDate());
+        Assertions.assertNotNull(book, "Response should not be null");
+        Assertions.assertEquals(book.getAuthor(), "Richard E. Silverman");
     }
 
 }
