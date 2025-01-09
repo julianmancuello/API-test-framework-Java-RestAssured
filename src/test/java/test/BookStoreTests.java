@@ -22,6 +22,7 @@ public class BookStoreTests extends BaseSetUp {
         BookStore bookStore = bookStoreApi.getAllBooks();
 
         System.out.println(bookStore.getBooks().get(0).getTitle());
+        System.out.println(bookStore.getBooks().get(0).getPublishDate());
         Assertions.assertEquals(bookStore.getBooks().get(0).getIsbn(), "9781449325862");
         //Assertions.assertEquals(bookStore.statusCode(), 200, "Response is not successfully!");
         //System.out.println("Get All Books Response: " + bookStore.asPrettyString());
