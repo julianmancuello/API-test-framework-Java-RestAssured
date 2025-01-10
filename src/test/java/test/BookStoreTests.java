@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import setup.BaseSetUp;
 
+import static common.Utils.*;
+
 public class BookStoreTests extends BaseSetUp {
 
     private BookStoreApi bookStoreApi;
@@ -40,7 +42,8 @@ public class BookStoreTests extends BaseSetUp {
 
     @Test
     public void testGetBookByIsbnWithInvalidIsbn() {
-        String invalidIsbn = "0000000000000";
+        String invalidIsbn = generateRandomIsbn();
+        System.out.println("Invalid ISBN: " + invalidIsbn);
         ErrorMessage errorMessage = bookStoreApi.getBookByIsbnWithInvalidIsbn(invalidIsbn);
 
         System.out.println(errorMessage.getCode());
