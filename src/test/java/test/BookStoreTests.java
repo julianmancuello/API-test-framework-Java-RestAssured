@@ -1,9 +1,9 @@
 package test;
 
 import clients.BookStoreApi;
-import io.restassured.response.Response;
 import models.Book;
 import models.BookStore;
+import models.ErrorMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,9 +28,9 @@ public class BookStoreTests extends BaseSetUp {
     }
 
     @Test
-    public void testGetBookByIsbnSuccessfully() {
+    public void testGetBookByIsbnWithExistingIsbn() {
         String isbn = "9781449325862";
-        Book book = bookStoreApi.getBookByISBNSuccessful(isbn);
+        Book book = bookStoreApi.getBookByIsbnWithExistingIsbn(isbn);
 
         System.out.println(book.getTitle());
         System.out.println(book.getPublishDate());
@@ -38,4 +38,13 @@ public class BookStoreTests extends BaseSetUp {
         Assertions.assertEquals(book.getAuthor(), "Richard E. Silverman");
     }
 
+    @Test
+    public void testGetBookByIsbnWithInvalidIsbn() {
+        String invalidIsbn = "0000000000000";
+        ErrorMessage errorMessage = bookStoreApi.getBookByIsbnWithInvalidIsbn(invalidIsbn);
+
+        System.out.println(errorMessage.getCode());
+        System.out.println(errorMessage.getMessage());
+        Assertions.assertNotNull(errorMessage, "Response should not be null");
+    }
 }
