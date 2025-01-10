@@ -1,6 +1,7 @@
 package test;
 
 import clients.BookStoreApi;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import models.Book;
 import models.BookStore;
 import models.ErrorMessage;
@@ -30,14 +31,14 @@ public class BookStoreTests extends BaseSetUp {
     }
 
     @Test
-    public void testGetBookByIsbnWithExistingIsbn() {
-        String isbn = "9781449325862";
+    @UseDataProvider("dataBooks")
+    public void testGetBookByIsbnWithExistingIsbn(String isbn, String title, String subtitle, String author, String publishDate, String publisher, int pages, String description, String website) {
         Book book = bookStoreApi.getBookByIsbnWithExistingIsbn(isbn);
 
         System.out.println(book.getTitle());
         System.out.println(book.getPublishDate());
         Assertions.assertNotNull(book, "Response should not be null");
-        Assertions.assertEquals(book.getAuthor(), "Richard E. Silverman");
+        Assertions.assertEquals(book.getAuthor(), author);
     }
 
     @Test
