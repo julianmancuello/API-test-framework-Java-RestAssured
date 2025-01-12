@@ -27,11 +27,12 @@ public class BookStoreTests extends BaseSetUp {
 
     @Test
     public void testGetAllBooksSuccessfully() {
+        info("Getting all books");
         BookStore bookStore = bookStoreApi.getAllBooks();
 
-        System.out.println(bookStore.getBooks().get(0).getTitle());
-        System.out.println(bookStore.getBooks().get(0).getPublishDate());
-        assertEquals(bookStore.getBooks().get(0).getIsbn(), "9781449325862");
+        assertNotNull(bookStore, "Response should not be null");
+        assertEquals(ALL_BOOKS, bookStore,"FAILED: The retrieved books do not match the expected books");
+        info("SUCCESS: The retrieved books matches the expected books");
     }
 
     @ParameterizedTest(name = "Test {index}")
