@@ -16,12 +16,12 @@ public class BaseApi {
                 .build();
     }
 
-    public RequestSpecification getRequestSpec(){
+    public RequestSpecification getRequestSpec() {
         return requestSpec;
     }
 
-    public RequestSpecification getRequestSpec(boolean authRequired){
-        if(authRequired){
+    public RequestSpecification getRequestSpec(boolean authRequired) {
+        if (authRequired) {
             return requestSpec.header("Authorization", "Bearer " + token);
         }
         return requestSpec;

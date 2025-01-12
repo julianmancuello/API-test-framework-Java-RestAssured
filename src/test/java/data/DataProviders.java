@@ -2,10 +2,9 @@ package data;
 
 import models.Book;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static data.TestData.*;
+import static data.TestData.ALL_BOOKS;
 
 public class DataProviders {
 

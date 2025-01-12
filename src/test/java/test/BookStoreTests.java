@@ -10,10 +10,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import setup.BaseSetUp;
 
-import static common.LoggerUtils.*;
-import static common.Utils.*;
-import static data.TestData.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static common.LoggerUtils.divider;
+import static common.LoggerUtils.info;
+import static common.Utils.generateRandomIsbn;
+import static data.TestData.ALL_BOOKS;
+import static data.TestData.ERROR_MESSAGE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class BookStoreTests extends BaseSetUp {
 
@@ -31,7 +34,7 @@ public class BookStoreTests extends BaseSetUp {
         BookStore bookStore = bookStoreApi.getAllBooks();
 
         assertNotNull(bookStore, "Response should not be null");
-        assertEquals(ALL_BOOKS, bookStore,"FAILED: The retrieved books do not match the expected books");
+        assertEquals(ALL_BOOKS, bookStore, "FAILED: The retrieved books do not match the expected books");
         info("SUCCESS: The retrieved books matches the expected books");
     }
 
