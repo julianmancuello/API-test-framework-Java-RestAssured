@@ -7,6 +7,7 @@ import models.BookStore;
 import models.ErrorMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -34,10 +35,10 @@ public class BookStoreTests extends BaseSetUp {
         Assertions.assertEquals(bookStore.getBooks().get(0).getIsbn(), "9781449325862");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Test {index}")
     @MethodSource(value = "data.DataProviders#dataBooks")
     public void testGetBookByIsbnWithExistingIsbn(Book bookTest) {
-        info("Test execution started for book: " + bookTest.getTitle());
+        info("Getting book by ISBN: " + bookTest.getIsbn());
         Book bookResult = bookStoreApi.getBookByIsbnWithExistingIsbn(bookTest.getIsbn());
 
         Assertions.assertNotNull(bookResult, "Response should not be null");
