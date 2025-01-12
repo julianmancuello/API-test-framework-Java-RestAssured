@@ -1,12 +1,15 @@
 package models;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonPropertyOrder({"isbn", "title", "subtitle", "author", "publishDate", "publisher", "pages", "description", "website"})
 public class Book {
-
     @JsonProperty("isbn")
     private String isbn;
     @JsonProperty("title")

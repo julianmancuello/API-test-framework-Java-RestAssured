@@ -31,15 +31,14 @@ public class BookStoreTests extends BaseSetUp {
         Assertions.assertEquals(bookStore.getBooks().get(0).getIsbn(), "9781449325862");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "Run: {index}  -  value: {arguments}")
     @MethodSource(value = "data.DataProviders#dataBooks")
-    public void testGetBookByIsbnWithExistingIsbn(String isbn, String title, String subtitle, String author, String publishDate, String publisher, int pages, String description, String website) {
-        Book book = bookStoreApi.getBookByIsbnWithExistingIsbn(isbn);
+    public void testGetBookByIsbnWithExistingIsbn(Book bookTest) {
+        Book bookResult = bookStoreApi.getBookByIsbnWithExistingIsbn(bookTest.getIsbn());
 
-        System.out.println(book.getTitle());
-        System.out.println(book.getPublishDate());
-        Assertions.assertNotNull(book, "Response should not be null");
-        Assertions.assertEquals(book.getAuthor(), author);
+        Assertions.assertNotNull(bookResult, "Response should not be null");
+        Assertions.assertEquals(bookResult, bookTest, "The information in the responded book is not equal as that in the expected book");
+        System.out.println("The information in the responded book is equal as that in the expected book");
     }
 
     @Test
