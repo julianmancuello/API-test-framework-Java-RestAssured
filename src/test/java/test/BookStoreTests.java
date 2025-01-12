@@ -1,13 +1,14 @@
 package test;
 
 import clients.BookStoreApi;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import models.Book;
 import models.BookStore;
 import models.ErrorMessage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import setup.BaseSetUp;
 
 import static common.Utils.*;
@@ -30,8 +31,8 @@ public class BookStoreTests extends BaseSetUp {
         Assertions.assertEquals(bookStore.getBooks().get(0).getIsbn(), "9781449325862");
     }
 
-    @Test
-    @UseDataProvider("dataBooks")
+    @ParameterizedTest
+    @MethodSource(value = "data.DataProviders#dataBooks")
     public void testGetBookByIsbnWithExistingIsbn(String isbn, String title, String subtitle, String author, String publishDate, String publisher, int pages, String description, String website) {
         Book book = bookStoreApi.getBookByIsbnWithExistingIsbn(isbn);
 
