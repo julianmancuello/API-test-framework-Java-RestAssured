@@ -4,13 +4,13 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
 
+import static common.Endpoints.BASE_URI;
+import static common.Endpoints.GENERATE_TOKEN_ENDPOINT;
 import static io.restassured.RestAssured.given;
 
 @Data
 public class BaseApi {
 
-    private final String BASE_URI = "https://bookstore.toolsqa.com";
-    private final String GENERATE_TOKEN_ENDPOINT = "/Account/v1/GenerateToken";
     private RequestSpecification requestSpec;
     private String token;
 

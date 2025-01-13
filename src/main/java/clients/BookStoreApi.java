@@ -4,13 +4,11 @@ import models.Book;
 import models.BookStore;
 import models.ErrorMessage;
 
+import static common.Endpoints.BOOKS_ENDPOINT;
+import static common.Endpoints.BOOK_ENDPOINT;
 import static io.restassured.RestAssured.given;
 
 public class BookStoreApi extends BaseApi {
-
-    private final String BOOKSTORE_ROOT = "/BookStore/v1";
-    private final String BOOKS_ENDPOINT = BOOKSTORE_ROOT + "/Books";
-    private final String BOOK_ENDPOINT = BOOKSTORE_ROOT + "/Book";
 
     public BookStoreApi() {
         super();

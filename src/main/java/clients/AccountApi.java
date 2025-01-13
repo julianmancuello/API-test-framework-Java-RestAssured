@@ -2,12 +2,10 @@ package clients;
 
 import io.restassured.response.Response;
 
+import static common.Endpoints.USER_ID_ENDPOINT;
 import static io.restassured.RestAssured.given;
 
 public class AccountApi extends BaseApi {
-
-    private final String ACCOUNT_ROOT = "/Account/v1";
-    private final String USER_ID_ENDPOINT = ACCOUNT_ROOT + "/User/{UUID}";
 
     public AccountApi() {
         super();
