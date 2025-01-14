@@ -1,5 +1,6 @@
 package clients;
 
+import context.ContextStore;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
@@ -32,7 +33,7 @@ public class BaseApi {
 
     private void generateToken() {
         System.out.println("Generando token");
-        Credentials credentialsMainUser = new Credentials("test1", "Testtest1!");
+        Credentials credentialsMainUser = new Credentials(ContextStore.get("standard-user"), ContextStore.get("standard-password"));
         token = given()
                 .spec(getRequestSpec())
                 .body(credentialsMainUser)
