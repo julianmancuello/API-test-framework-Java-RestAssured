@@ -3,6 +3,7 @@ package clients;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
+import models.requests.Credentials;
 
 import static common.Endpoints.BASE_URI;
 import static common.Endpoints.GENERATE_TOKEN_ENDPOINT;
@@ -31,9 +32,11 @@ public class BaseApi {
 
     private void generateToken() {
         System.out.println("Generando token");
+        Credentials credentialsMainUser = new Credentials("test1", "Testtest1!");
         token = given()
                 .spec(getRequestSpec())
-                .body("{ \"userName\": \"test1\", \"password\": \"Testtest1!\" }")
+                .body(credentialsMainUser)
+                //.body("{ \"userName\": \"test1\", \"password\": \"Testtest1!\" }")
                 .when()
                 .post(GENERATE_TOKEN_ENDPOINT)
                 .then().statusCode(200)
