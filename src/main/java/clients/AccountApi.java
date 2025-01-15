@@ -1,7 +1,9 @@
 package clients;
 
+import context.ContextStore;
 import io.restassured.response.Response;
 
+import static common.Authentication.*;
 import static common.Endpoints.USER_ID_ENDPOINT;
 import static io.restassured.RestAssured.given;
 
@@ -11,10 +13,10 @@ public class AccountApi extends BaseApi {
         super();
     }
 
-    public Response getUser() {
+    public Response getUser(UserType userType) {
         return given()
-                .spec(getRequestSpec(true))
-                .pathParams("UUID", "e1494aaa-674b-4cc8-a824-9d34d8ecdc95")
+                .spec(getRequestSpecWithAuth(userType))
+                .pathParams("UUID", ContextStore.get("testUserId"))
                 .when()
                 .get(USER_ID_ENDPOINT)
                 .then().statusCode(200)

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import setup.BaseSetUp;
 
+import static common.Authentication.UserType.*;
 import static common.LoggerUtils.divider;
 import static common.LoggerUtils.info;
 
@@ -21,7 +22,7 @@ public class AccountTests extends BaseSetUp {
 
     @Test
     public void testAccount() {
-        Response response = accountApi.getUser();
+        Response response = accountApi.getUser(MAIN_USER);
         info(response.asPrettyString());
     }
 }
