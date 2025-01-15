@@ -23,7 +23,7 @@ public class BookStoreApi extends BaseApi {
                 .extract().body().as(BookStore.class);
     }
 
-    public Book getBookByIsbnWithExistingIsbn(String isbn) {
+    public Book getBookByIsbnWithValidIsbn(String isbn) {
         return given()
                 .spec(getRequestSpec())
                 .param("ISBN", isbn)

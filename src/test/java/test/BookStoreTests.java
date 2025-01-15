@@ -33,7 +33,6 @@ public class BookStoreTests extends BaseSetUp {
         info("Getting all books");
         BookStore bookStore = bookStoreApi.getAllBooks();
 
-        assertNotNull(bookStore, "Response should not be null");
         assertEquals(ALL_BOOKS, bookStore, "FAILED: The retrieved books do not match the expected books");
         info("SUCCESS: The retrieved books matches the expected books");
     }
@@ -42,9 +41,8 @@ public class BookStoreTests extends BaseSetUp {
     @MethodSource(value = "data.DataProviders#dataBooks")
     public void testGetBookByIsbnWithExistingIsbn(Book bookTest) {
         info("Getting book by ISBN: " + bookTest.getIsbn());
-        Book bookResult = bookStoreApi.getBookByIsbnWithExistingIsbn(bookTest.getIsbn());
+        Book bookResult = bookStoreApi.getBookByIsbnWithValidIsbn(bookTest.getIsbn());
 
-        assertNotNull(bookResult, "Response should not be null");
         assertEquals(bookTest, bookResult, "FAILED: The book data in the response does not match the expected data.");
         info("SUCCESS: The book data in the response matches the expected data.");
     }
@@ -55,7 +53,6 @@ public class BookStoreTests extends BaseSetUp {
         info("Testing to get a book with invalid ISBN: " + invalidIsbn);
         ErrorMessage errorMessageResult = bookStoreApi.getBookByIsbnWithInvalidIsbn(invalidIsbn);
 
-        assertNotNull(errorMessageResult, "Response should not be null");
         assertEquals(ERROR_MESSAGE, errorMessageResult, "FAILED: The error message data in the response does not match the expected data");
         info("SUCCESS: The error message data in the response matches the expected data.");
     }

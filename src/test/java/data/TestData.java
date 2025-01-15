@@ -1,12 +1,18 @@
 package data;
 
+import context.ContextStore;
 import models.responses.Book;
 import models.responses.BookStore;
 import models.responses.ErrorMessage;
+import models.responses.User;
 
 import java.util.Arrays;
 
+import static common.Utils.getTestUser;
+import static common.Utils.getTestUserId;
+
 public class TestData {
+    //Books
     public static final Book BOOK1 = new Book("9781449325862", "Git Pocket Guide", "A Working Introduction", "Richard E. Silverman", "2020-06-04T08:48:39.000Z", "O'Reilly Media", 234, "This pocket guide is the perfect on-the-job companion to Git, the distributed version control system. It provides a compact, readable introduction to Git for new users, as well as a reference to common commands and procedures for those of you with Git exp", "http://chimera.labs.oreilly.com/books/1230000000561/index.html");
     public static final Book BOOK2 = new Book("9781449331818", "Learning JavaScript Design Patterns", "A JavaScript and jQuery Developer's Guide", "Addy Osmani", "2020-06-04T09:11:40.000Z", "O'Reilly Media", 254, "With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-da", "http://www.addyosmani.com/resources/essentialjsdesignpatterns/book/");
     public static final Book BOOK3 = new Book("9781449337711", "Designing Evolvable Web APIs with ASP.NET", "Harnessing the Power of the Web", "Glenn Block et al.", "2020-06-04T09:12:43.000Z", "O'Reilly Media", 238, "Design and build Web APIs for a broad range of clients—including browsers and mobile devices—that can adapt to change over time. This practical, hands-on guide takes you through the theory and tools you need to build evolvable HTTP services with Microsoft", "http://chimera.labs.oreilly.com/books/1234000001708/index.html");
@@ -16,5 +22,11 @@ public class TestData {
     public static final Book BOOK7 = new Book("9781593275846", "Eloquent JavaScript, Second Edition", "A Modern Introduction to Programming", "Marijn Haverbeke", "2014-12-14T00:00:00.000Z", "No Starch Press", 472, "JavaScript lies at the heart of almost every modern web application, from social apps to the newest browser-based games. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale ", "http://eloquentjavascript.net/");
     public static final Book BOOK8 = new Book("9781593277574", "Understanding ECMAScript 6", "The Definitive Guide for JavaScript Developers", "Nicholas C. Zakas", "2016-09-03T00:00:00.000Z", "No Starch Press", 352, "ECMAScript 6 represents the biggest update to the core of JavaScript in the history of the language. In Understanding ECMAScript 6, expert developer Nicholas C. Zakas provides a complete guide to the object types, syntax, and other exciting changes that E", "https://leanpub.com/understandinges6/read");
     public static final BookStore ALL_BOOKS = new BookStore(Arrays.asList(BOOK1, BOOK2, BOOK3, BOOK4, BOOK5, BOOK6, BOOK7, BOOK8));
+    //Responses
     public static final ErrorMessage ERROR_MESSAGE = new ErrorMessage(1205, "ISBN supplied is not available in Books Collection!");
+    //User's information
+    public static final User MAIN_USER_INF = new User("6a5d6196-0e8b-41d3-8ef5-6a2787156b6c", "masterUser", Arrays.asList(BOOK2, BOOK3, BOOK1));
+    public static final User EMPTY_USER_INF = new User("ebb317ad-0eb5-4871-95b5-eb32af136d5a", "EmptyUser", Arrays.asList());
+//    public static final User MAIN_USER_INF = new User(ContextStore.get("main-user-id"), ContextStore.get("main-user"), Arrays.asList(BOOK2, BOOK3, BOOK1));
+//    public static final User EMPTY_USER_INF = new User(ContextStore.get("empty-user-id"), ContextStore.get("empty-user"), Arrays.asList());
 }
