@@ -6,6 +6,8 @@ import models.requests.Credentials;
 
 import static common.Endpoints.BASE_URI;
 import static common.Endpoints.GENERATE_TOKEN_ENDPOINT;
+import static common.Utils.getTestPassword;
+import static common.Utils.getTestUser;
 import static io.restassured.RestAssured.given;
 
 public class Authentication {
@@ -17,7 +19,7 @@ public class Authentication {
 
     public static Credentials userCredentials(UserType userType) {
         loadUserCredentials(userType);
-        return new Credentials(ContextStore.get("testUser"), ContextStore.get("testPassword"));
+        return new Credentials(getTestUser(), getTestPassword());
     }
 
     public static void loadUserCredentials(UserType userType) {

@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 
 import static common.Authentication.*;
 import static common.Endpoints.USER_ID_ENDPOINT;
+import static common.Utils.getTestUserId;
 import static io.restassured.RestAssured.given;
 
 public class AccountApi extends BaseApi {
@@ -16,7 +17,7 @@ public class AccountApi extends BaseApi {
     public Response getUser(UserType userType) {
         return given()
                 .spec(getRequestSpecWithAuth(userType))
-                .pathParams("UUID", ContextStore.get("testUserId"))
+                .pathParams("UUID", getTestUserId())
                 .when()
                 .get(USER_ID_ENDPOINT)
                 .then().statusCode(200)
