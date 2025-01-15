@@ -1,8 +1,8 @@
 package clients;
 
-import models.Book;
-import models.BookStore;
-import models.ErrorMessage;
+import models.responses.Book;
+import models.responses.BookStore;
+import models.responses.ErrorMessage;
 
 import static common.Endpoints.BOOKS_ENDPOINT;
 import static common.Endpoints.BOOK_ENDPOINT;

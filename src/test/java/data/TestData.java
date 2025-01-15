@@ -1,8 +1,8 @@
 package data;
 
-import models.Book;
-import models.BookStore;
-import models.ErrorMessage;
+import models.responses.Book;
+import models.responses.BookStore;
+import models.responses.ErrorMessage;
 
 import java.util.Arrays;
 

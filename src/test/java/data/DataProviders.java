@@ -1,6 +1,6 @@
 package data;
 
-import models.Book;
+import models.responses.Book;
 
 import java.util.List;
 

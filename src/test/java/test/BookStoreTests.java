@@ -1,9 +1,9 @@
 package test;
 
 import clients.BookStoreApi;
-import models.Book;
-import models.BookStore;
-import models.ErrorMessage;
+import models.responses.Book;
+import models.responses.BookStore;
+import models.responses.ErrorMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
