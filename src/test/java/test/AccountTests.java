@@ -1,7 +1,7 @@
 package test;
 
 import clients.AccountApi;
-import io.restassured.response.Response;
+import models.responses.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import setup.BaseSetUp;
@@ -22,7 +22,9 @@ public class AccountTests extends BaseSetUp {
 
     @Test
     public void testAccount() {
-        Response response = accountApi.getUser(MAIN_USER);
-        info(response.asPrettyString());
+        User user = accountApi.getUser(MAIN_USER);
+        info(user.getUserId());
+        info(user.getUsername());
+        info(user.getBooks().toString());
     }
 }
