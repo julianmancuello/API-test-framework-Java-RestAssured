@@ -1,6 +1,5 @@
 package data;
 
-import io.restassured.specification.Argument;
 import models.responses.Book;
 import org.junit.jupiter.params.provider.Arguments;
 
@@ -19,6 +18,9 @@ public class DataProviders {
     }
 
     public static List<Arguments> dataUsers() {
-        return Arrays.asList(arguments(MAIN_USER, MAIN_USER_INF), arguments(EMPTY_USER, EMPTY_USER_INF));
+        return Arrays.asList(
+                arguments(MAIN_USER, MAIN_USER_INF),
+                arguments(EMPTY_USER, EMPTY_USER_INF)
+        );
     }
 }

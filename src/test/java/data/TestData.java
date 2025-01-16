@@ -25,8 +25,6 @@ public class TestData {
     //Responses
     public static final ErrorMessage ERROR_MESSAGE = new ErrorMessage(1205, "ISBN supplied is not available in Books Collection!");
     //User's information
-    public static final User MAIN_USER_INF = new User("6a5d6196-0e8b-41d3-8ef5-6a2787156b6c", "masterUser", Arrays.asList(BOOK2, BOOK3, BOOK1));
-    public static final User EMPTY_USER_INF = new User("ebb317ad-0eb5-4871-95b5-eb32af136d5a", "EmptyUser", Arrays.asList());
-//    public static final User MAIN_USER_INF = new User(ContextStore.get("main-user-id"), ContextStore.get("main-user"), Arrays.asList(BOOK2, BOOK3, BOOK1));
-//    public static final User EMPTY_USER_INF = new User(ContextStore.get("empty-user-id"), ContextStore.get("empty-user"), Arrays.asList());
+    public static final User MAIN_USER_INF = new User(ContextStore.get("main-user-id"), ContextStore.get("main-user"), Arrays.asList(BOOK2, BOOK3, BOOK1));
+    public static final User EMPTY_USER_INF = new User(ContextStore.get("empty-user-id"), ContextStore.get("empty-user"), Arrays.asList());
 }
