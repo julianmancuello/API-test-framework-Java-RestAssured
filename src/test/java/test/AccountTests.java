@@ -1,6 +1,7 @@
 package test;
 
 import clients.AccountApi;
+import models.responses.ErrorMessage;
 import models.responses.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,6 +11,7 @@ import setup.BaseSetUp;
 import static common.Authentication.*;
 import static common.LoggerUtils.divider;
 import static common.LoggerUtils.info;
+import static data.TestData.ERROR_UNAUTHORIZED_USER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AccountTests extends BaseSetUp {
@@ -23,12 +25,22 @@ public class AccountTests extends BaseSetUp {
     }
 
     @ParameterizedTest
-    @MethodSource(value = "data.DataProviders#dataUsers")
+    @MethodSource(value = "data.DataProviders#dataUsersInformation")
     public void testGetUserInformation(UserType userType, User userTest) {
-        info("Getting user's information");
+        info("Getting user information");
         User user = accountApi.getUser(userType);
 
-        assertEquals(userTest, user, "FAILED: " + user.getUsername() + "'s information in the response does not match the expected data.");
-        info("SUCCESS: " + user.getUsername() + "'s information in the response matches the expected data.");
+        assertEquals(userTest, user, "FAILED: " + user.getUsername() + " information in the response does not match the expected data.");
+        info("SUCCESS: " + user.getUsername() + " information in the response matches the expected data.");
+    }
+
+    @ParameterizedTest
+    @MethodSource(value = "data.DataProviders#dataUsers")
+    public void testGetUserInformationWithoutToken(UserType userType) {
+        info("Testing to get a user without token");
+        ErrorMessage errorMessage = accountApi.getUserWithoutToken(userType);
+
+        assertEquals(ERROR_UNAUTHORIZED_USER, errorMessage, "FAILED: The error message data in the response when trying to get " + userType + " information does not match the expected data");
+        info("SUCCESS: The error message data in the response when trying to get " + userType + " information matches the expected data.");
     }
 }

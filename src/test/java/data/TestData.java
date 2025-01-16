@@ -8,9 +8,6 @@ import models.responses.User;
 
 import java.util.Arrays;
 
-import static common.Utils.getTestUser;
-import static common.Utils.getTestUserId;
-
 public class TestData {
     //Books
     public static final Book BOOK1 = new Book("9781449325862", "Git Pocket Guide", "A Working Introduction", "Richard E. Silverman", "2020-06-04T08:48:39.000Z", "O'Reilly Media", 234, "This pocket guide is the perfect on-the-job companion to Git, the distributed version control system. It provides a compact, readable introduction to Git for new users, as well as a reference to common commands and procedures for those of you with Git exp", "http://chimera.labs.oreilly.com/books/1230000000561/index.html");
@@ -23,7 +20,8 @@ public class TestData {
     public static final Book BOOK8 = new Book("9781593277574", "Understanding ECMAScript 6", "The Definitive Guide for JavaScript Developers", "Nicholas C. Zakas", "2016-09-03T00:00:00.000Z", "No Starch Press", 352, "ECMAScript 6 represents the biggest update to the core of JavaScript in the history of the language. In Understanding ECMAScript 6, expert developer Nicholas C. Zakas provides a complete guide to the object types, syntax, and other exciting changes that E", "https://leanpub.com/understandinges6/read");
     public static final BookStore ALL_BOOKS = new BookStore(Arrays.asList(BOOK1, BOOK2, BOOK3, BOOK4, BOOK5, BOOK6, BOOK7, BOOK8));
     //Responses
-    public static final ErrorMessage ERROR_MESSAGE = new ErrorMessage(1205, "ISBN supplied is not available in Books Collection!");
+    public static final ErrorMessage ERROR_INVALID_ISBN = new ErrorMessage(1205, "ISBN supplied is not available in Books Collection!");
+    public static final ErrorMessage ERROR_UNAUTHORIZED_USER = new ErrorMessage(1200, "User not authorized!");
     //User's information
     public static final User MAIN_USER_INF = new User(ContextStore.get("main-user-id"), ContextStore.get("main-user"), Arrays.asList(BOOK2, BOOK3, BOOK1));
     public static final User EMPTY_USER_INF = new User(ContextStore.get("empty-user-id"), ContextStore.get("empty-user"), Arrays.asList());

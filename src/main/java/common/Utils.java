@@ -4,6 +4,8 @@ import context.ContextStore;
 
 import java.security.SecureRandom;
 
+import static common.Authentication.*;
+
 public class Utils {
 
     private static final SecureRandom random = new SecureRandom();
@@ -25,5 +27,12 @@ public class Utils {
 
     public static String getTestUserId() {
         return ContextStore.get("testUserId");
+    }
+
+    public static void loadUserId(UserType userType) {
+        switch (userType) {
+            case MAIN_USER -> ContextStore.put("testUserId", ContextStore.get("main-user-id"));
+            case EMPTY_USER -> ContextStore.put("testUserId", ContextStore.get("empty-user-id"));
+        }
     }
 }

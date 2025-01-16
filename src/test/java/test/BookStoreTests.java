@@ -14,7 +14,7 @@ import static common.LoggerUtils.divider;
 import static common.LoggerUtils.info;
 import static common.Utils.generateRandomIsbn;
 import static data.TestData.ALL_BOOKS;
-import static data.TestData.ERROR_MESSAGE;
+import static data.TestData.ERROR_INVALID_ISBN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -37,7 +37,7 @@ public class BookStoreTests extends BaseSetUp {
         info("SUCCESS: The retrieved books matches the expected books");
     }
 
-    @ParameterizedTest(name = "Test {index}")
+    @ParameterizedTest(name = "Test Book {index}")
     @MethodSource(value = "data.DataProviders#dataBooks")
     public void testGetBookByIsbnWithExistingIsbn(Book bookTest) {
         info("Getting book by ISBN: " + bookTest.getIsbn());
@@ -53,7 +53,7 @@ public class BookStoreTests extends BaseSetUp {
         info("Testing to get a book with invalid ISBN: " + invalidIsbn);
         ErrorMessage errorMessageResult = bookStoreApi.getBookByIsbnWithInvalidIsbn(invalidIsbn);
 
-        assertEquals(ERROR_MESSAGE, errorMessageResult, "FAILED: The error message data in the response does not match the expected data");
+        assertEquals(ERROR_INVALID_ISBN, errorMessageResult, "FAILED: The error message data in the response does not match the expected data");
         info("SUCCESS: The error message data in the response matches the expected data.");
     }
 }
