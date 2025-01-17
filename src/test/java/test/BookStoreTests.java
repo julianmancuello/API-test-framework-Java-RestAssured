@@ -3,7 +3,7 @@ package test;
 import clients.BookStoreApi;
 import models.responses.Book;
 import models.responses.BookStore;
-import models.responses.ErrorMessage;
+import models.responses.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -51,9 +51,9 @@ public class BookStoreTests extends BaseSetUp {
     public void testGetBookByIsbnWithInvalidIsbn() {
         String invalidIsbn = generateRandomIsbn();
         info("Testing to get a book with invalid ISBN: " + invalidIsbn);
-        ErrorMessage errorMessageResult = bookStoreApi.getBookByIsbnWithInvalidIsbn(invalidIsbn);
+        Message messageResult = bookStoreApi.getBookByIsbnWithInvalidIsbn(invalidIsbn);
 
-        assertEquals(ERROR_INVALID_ISBN, errorMessageResult, "FAILED: The error message data in the response does not match the expected data");
+        assertEquals(ERROR_INVALID_ISBN, messageResult, "FAILED: The error message data in the response does not match the expected data");
         info("SUCCESS: The error message data in the response matches the expected data.");
     }
 }

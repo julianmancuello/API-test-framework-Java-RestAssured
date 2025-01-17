@@ -1,12 +1,17 @@
 package clients;
 
-import models.responses.ErrorMessage;
+import context.ContextStore;
+import io.restassured.response.Response;
+import models.requests.Credentials;
+import models.responses.Message;
 import models.responses.User;
+import models.responses.UserWithTypo;
 
 import static common.Authentication.*;
+import static common.Authentication.UserType.*;
+import static common.Endpoints.USER_ENDPOINT;
 import static common.Endpoints.USER_ID_ENDPOINT;
-import static common.Utils.getTestUserId;
-import static common.Utils.loadUserId;
+import static common.Utils.*;
 import static io.restassured.RestAssured.given;
 
 public class AccountApi extends BaseApi {
@@ -25,7 +30,7 @@ public class AccountApi extends BaseApi {
                 .extract().body().as(User.class);
     }
 
-    public ErrorMessage getUserWithoutToken(UserType userType) {
+    public Message getUserWithoutToken(UserType userType) {
         loadUserId(userType);
         return given()
                 .spec(getRequestSpec())
@@ -33,6 +38,34 @@ public class AccountApi extends BaseApi {
                 .when()
                 .get(USER_ID_ENDPOINT)
                 .then().statusCode(401)
-                .extract().body().as(ErrorMessage.class);
+                .extract().body().as(Message.class);
+    }
+
+    public UserWithTypo createNewUser() {
+        String newUsername = generateRandomUser();
+        String newPassword = generateRandomPassword();
+        System.out.println(newUsername);
+        System.out.println(newPassword);
+        ContextStore.put("newUsername", newUsername);
+        ContextStore.put("newPassword", newPassword);
+        UserWithTypo newUserCreated = given()
+                .spec(getRequestSpec())
+                .body(new Credentials(newUsername, newPassword))
+                .when()
+                .post(USER_ENDPOINT)
+                .then().statusCode(201)
+                .extract().body().as(UserWithTypo.class);
+        ContextStore.put("newUserId", newUserCreated.getUserId());
+        return newUserCreated;
+    }
+
+    public Response deleteDisposableUser() {
+        return given()
+                .spec(getRequestSpecWithAuth(DISPOSABLE_USER))
+                .pathParams("UUID", getTestUserId())
+                .when()
+                .delete(USER_ID_ENDPOINT)
+                .then().statusCode(204)
+                .extract().response();
     }
 }

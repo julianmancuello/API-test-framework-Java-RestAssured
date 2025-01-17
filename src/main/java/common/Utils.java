@@ -11,7 +11,7 @@ public class Utils {
     private static final String UPPERCASE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LOWERCASE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
     private static final String DIGIT_CHARACTERS = "0123456789";
-    private static final String SPECIAL_CHARACTERS = "!@#$%^&*()-_=+[]{}|;:',.<>?/`~";
+    private static final String SPECIAL_CHARACTERS = "!@#$%^&*";
     private static final String ALPHANUMERIC_CHARACTERS =  UPPERCASE_CHARACTERS + LOWERCASE_CHARACTERS + DIGIT_CHARACTERS;
     private static final SecureRandom random = new SecureRandom();
 

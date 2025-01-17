@@ -6,7 +6,8 @@ public class Endpoints {
     //Account endpoints
     public static final String ACCOUNT_ROOT = "/Account/v1";
     public static final String GENERATE_TOKEN_ENDPOINT = ACCOUNT_ROOT + "/GenerateToken";
-    public static final String USER_ID_ENDPOINT = ACCOUNT_ROOT + "/User/{UUID}";
+    public static final String USER_ENDPOINT = ACCOUNT_ROOT + "/User";
+    public static final String USER_ID_ENDPOINT = USER_ENDPOINT + "/{UUID}";
     //BookStore endpoints
     public static final String BOOKSTORE_ROOT = "/BookStore/v1";
     public static final String BOOKS_ENDPOINT = BOOKSTORE_ROOT + "/Books";

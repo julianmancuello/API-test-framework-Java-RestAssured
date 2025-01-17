@@ -15,6 +15,7 @@ public class Authentication {
     public enum UserType {
         MAIN_USER,
         EMPTY_USER,
+        DISPOSABLE_USER
     }
 
     public static Credentials userCredentials(UserType userType) {
@@ -26,6 +27,7 @@ public class Authentication {
         switch (userType) {
             case MAIN_USER -> setTestUser(ContextStore.get("main-user"), ContextStore.get("main-password"), ContextStore.get("main-user-id"));
             case EMPTY_USER -> setTestUser(ContextStore.get("empty-user"), ContextStore.get("empty-password"), ContextStore.get("empty-user-id"));
+            case DISPOSABLE_USER -> setTestUser(ContextStore.get("newUsername"), ContextStore.get("newPassword"), ContextStore.get("newUserId"));
         };
     }
 

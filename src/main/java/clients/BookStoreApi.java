@@ -2,7 +2,7 @@ package clients;
 
 import models.responses.Book;
 import models.responses.BookStore;
-import models.responses.ErrorMessage;
+import models.responses.Message;
 
 import static common.Endpoints.BOOKS_ENDPOINT;
 import static common.Endpoints.BOOK_ENDPOINT;
@@ -33,13 +33,13 @@ public class BookStoreApi extends BaseApi {
                 .extract().body().as(Book.class);
     }
 
-    public ErrorMessage getBookByIsbnWithInvalidIsbn(String isbn) {
+    public Message getBookByIsbnWithInvalidIsbn(String isbn) {
         return given()
                 .spec(getRequestSpec())
                 .param("ISBN", isbn)
                 .when()
                 .get(BOOK_ENDPOINT)
                 .then().statusCode(400)
-                .extract().body().as(ErrorMessage.class);
+                .extract().body().as(Message.class);
     }
 }

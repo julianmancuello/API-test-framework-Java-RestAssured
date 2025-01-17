@@ -6,14 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonPropertyOrder({"code", "message"})
-public class ErrorMessage {
-
-    @JsonProperty("code")
-    private int code;
-    @JsonProperty("message")
-    private String message;
+@JsonPropertyOrder({"userId", "username", "books"})
+public class UserWithTypo {
+    @JsonProperty("userID")
+    private String userId;
+    @JsonProperty("username")
+    private String username;
+    @JsonProperty("books")
+    private List<Book> books;
 }
