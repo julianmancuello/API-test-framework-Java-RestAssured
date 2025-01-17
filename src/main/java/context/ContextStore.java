@@ -9,6 +9,7 @@ import static common.LoggerUtils.info;
 
 public class ContextStore {
 
+    private static final String PROPERTIES_DIR = "src/test/resources/test.properties";
     private static final Map<String, Object> context = new ConcurrentHashMap<>();
 
     public static synchronized void put(String key, Object value) {
@@ -28,7 +29,7 @@ public class ContextStore {
         return (T) value;
     }
 
-    public static synchronized void loadProperties(String filePath) {
+    private static synchronized void loadProperties(String filePath) {
         Properties properties = new Properties();
         try (FileInputStream inputStream = new FileInputStream(filePath)) {
             properties.load(inputStream);
@@ -49,5 +50,9 @@ public class ContextStore {
 
     public static synchronized void clear() {
         context.clear();
+    }
+
+    public static void loadPropertiesFile() {
+        loadProperties(PROPERTIES_DIR);
     }
 }

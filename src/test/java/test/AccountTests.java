@@ -6,15 +6,17 @@ import io.restassured.response.Response;
 import models.responses.Message;
 import models.responses.User;
 import models.responses.UserWithTypo;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import setup.BaseSetUp;
 
 import static common.Authentication.*;
+import static common.Authentication.UserType.*;
 import static common.LoggerUtils.divider;
 import static common.LoggerUtils.info;
+import static common.Utils.generateRandomPassword;
+import static common.Utils.generateRandomUser;
 import static data.TestData.ERROR_UNAUTHORIZED_USER;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,17 +52,33 @@ public class AccountTests extends BaseSetUp {
 
     @Test
     public void testNewUser() {
-        UserWithTypo newUser = accountApi.createNewUser();
+        String newUsername = generateRandomUser();
+        String newPassword = generateRandomPassword();
+        ContextStore.put("newUsername", newUsername);
+        ContextStore.put("newPassword", newPassword);
+        UserWithTypo newUser = accountApi.createUser(newUsername, newPassword);
+        ContextStore.put("newUserId", newUser.getUserId());
 
         info(ContextStore.get("newUsername"));
         info(ContextStore.get("newPassword"));
         info(ContextStore.get("newUserId"));
         info(String.valueOf(newUser));
-        //ContextStore.put("newUserId", newUser.getUserId());
+    }
 
-        Response response = accountApi.deleteDisposableUser();
+    @Test
+    public void testDeleteUser() {
+        String newUsername = generateRandomUser();
+        String newPassword = generateRandomPassword();
+        ContextStore.put("newUsername", newUsername);
+        ContextStore.put("newPassword", newPassword);
+        UserWithTypo newUser = accountApi.createUser(newUsername, newPassword);
+        ContextStore.put("newUserId", newUser.getUserId());
+
         info("-/-/-/-/-");
+        info("Deleting created user");
+        Response response = accountApi.deleteUser(DISPOSABLE_USER);
         info(response.asPrettyString());
-        assertTrue(response.getBody().asString().isEmpty(), "The body response is not empty");
+        assertTrue(response.getBody().asString().isEmpty(), "Error: The user was not deleted");
+        info("The user was deleted");
     }
 }

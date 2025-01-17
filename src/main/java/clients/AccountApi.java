@@ -1,6 +1,5 @@
 package clients;
 
-import context.ContextStore;
 import io.restassured.response.Response;
 import models.requests.Credentials;
 import models.responses.Message;
@@ -8,7 +7,6 @@ import models.responses.User;
 import models.responses.UserWithTypo;
 
 import static common.Authentication.*;
-import static common.Authentication.UserType.*;
 import static common.Endpoints.USER_ENDPOINT;
 import static common.Endpoints.USER_ID_ENDPOINT;
 import static common.Utils.*;
@@ -41,27 +39,19 @@ public class AccountApi extends BaseApi {
                 .extract().body().as(Message.class);
     }
 
-    public UserWithTypo createNewUser() {
-        String newUsername = generateRandomUser();
-        String newPassword = generateRandomPassword();
-        System.out.println(newUsername);
-        System.out.println(newPassword);
-        ContextStore.put("newUsername", newUsername);
-        ContextStore.put("newPassword", newPassword);
-        UserWithTypo newUserCreated = given()
+    public UserWithTypo createUser(String newUsername, String newPassword) {
+        return given()
                 .spec(getRequestSpec())
                 .body(new Credentials(newUsername, newPassword))
                 .when()
                 .post(USER_ENDPOINT)
                 .then().statusCode(201)
                 .extract().body().as(UserWithTypo.class);
-        ContextStore.put("newUserId", newUserCreated.getUserId());
-        return newUserCreated;
     }
 
-    public Response deleteDisposableUser() {
+    public Response deleteUser(UserType userType) {
         return given()
-                .spec(getRequestSpecWithAuth(DISPOSABLE_USER))
+                .spec(getRequestSpecWithAuth(userType))
                 .pathParams("UUID", getTestUserId())
                 .when()
                 .delete(USER_ID_ENDPOINT)
