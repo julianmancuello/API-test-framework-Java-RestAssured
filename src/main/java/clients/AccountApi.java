@@ -1,5 +1,6 @@
 package clients;
 
+import context.ContextStore;
 import io.restassured.response.Response;
 import models.requests.Credentials;
 import models.responses.Message;
@@ -47,6 +48,19 @@ public class AccountApi extends BaseApi {
                 .post(USER_ENDPOINT)
                 .then().statusCode(201)
                 .extract().body().as(UserWithTypo.class);
+    }
+
+    public UserWithTypo createNewRandomUser() {
+        String newUsername = generateRandomUser();
+        String newPassword = generateRandomPassword();
+//        ContextStore.put("newUsername", newUsername);
+//        ContextStore.put("newPassword", newPassword);
+        storeInContextAndLogInConsole("newUsername", newUsername);
+        storeInContextAndLogInConsole("newPassword", newPassword);
+        UserWithTypo newRandomUser = createUser(newUsername, newPassword);
+//        ContextStore.put("newUserId", newRandomUser.getUserId());
+        storeInContextAndLogInConsole("newUserId", newRandomUser.getUserId());
+        return newRandomUser;
     }
 
     public Response deleteUser(UserType userType) {

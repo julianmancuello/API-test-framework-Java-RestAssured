@@ -1,7 +1,6 @@
 package test;
 
 import clients.AccountApi;
-import context.ContextStore;
 import io.restassured.response.Response;
 import models.responses.Message;
 import models.responses.User;
@@ -15,9 +14,7 @@ import static common.Authentication.*;
 import static common.Authentication.UserType.*;
 import static common.LoggerUtils.divider;
 import static common.LoggerUtils.info;
-import static common.Utils.generateRandomPassword;
-import static common.Utils.generateRandomUser;
-import static data.TestData.ERROR_UNAUTHORIZED_USER;
+import static data.TestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTests extends BaseSetUp {
@@ -51,34 +48,23 @@ public class AccountTests extends BaseSetUp {
     }
 
     @Test
-    public void testNewUser() {
-        String newUsername = generateRandomUser();
-        String newPassword = generateRandomPassword();
-        ContextStore.put("newUsername", newUsername);
-        ContextStore.put("newPassword", newPassword);
-        UserWithTypo newUser = accountApi.createUser(newUsername, newPassword);
-        ContextStore.put("newUserId", newUser.getUserId());
+    public void testCreateNewUserSuccessfully() {
+        info("Creating a new user");
+        UserWithTypo newUser = accountApi.createNewRandomUser();
 
-        info(ContextStore.get("newUsername"));
-        info(ContextStore.get("newPassword"));
-        info(ContextStore.get("newUserId"));
-        info(String.valueOf(newUser));
+        assertEquals(NEW_USER_INF, newUser, "FAILED: The response body when creating a new user does not match the expected data");
+        info("SUCCESS: The response body when creating a new user matches the expected data");
     }
 
     @Test
     public void testDeleteUser() {
-        String newUsername = generateRandomUser();
-        String newPassword = generateRandomPassword();
-        ContextStore.put("newUsername", newUsername);
-        ContextStore.put("newPassword", newPassword);
-        UserWithTypo newUser = accountApi.createUser(newUsername, newPassword);
-        ContextStore.put("newUserId", newUser.getUserId());
-
-        info("-/-/-/-/-");
-        info("Deleting created user");
+        info("Deleting a user");
+        info("Precondition: Create a new user to delete it");
+        UserWithTypo newUser = accountApi.createNewRandomUser();
+        info("User created, proceeding to delete it");
         Response response = accountApi.deleteUser(DISPOSABLE_USER);
-        info(response.asPrettyString());
-        assertTrue(response.getBody().asString().isEmpty(), "Error: The user was not deleted");
-        info("The user was deleted");
+
+        assertTrue(response.getBody().asString().isEmpty(), "FAILED: The response body is not empty");
+        info("SUCCESS: The response body is empty");
     }
 }

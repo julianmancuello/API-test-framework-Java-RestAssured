@@ -5,6 +5,7 @@ import context.ContextStore;
 import java.security.SecureRandom;
 
 import static common.Authentication.*;
+import static common.LoggerUtils.info;
 
 public class Utils {
 
@@ -76,5 +77,10 @@ public class Utils {
 
     public static char getRandomCharacter(String characters) {
         return characters.charAt(random.nextInt(characters.length()));
+    }
+
+    public static void storeInContextAndLogInConsole(String key, Object value) {
+        ContextStore.put(key, value);
+        info(key + ": " + value);
     }
 }
