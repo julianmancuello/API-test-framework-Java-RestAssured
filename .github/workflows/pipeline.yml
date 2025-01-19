@@ -5,13 +5,9 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
@@ -32,9 +28,3 @@ jobs:
 
       - name: Run regression tests
         run: mvn clean test -Dgroups=regression
-
-      - name: Set up Git user
-        if: github.event_name == 'push'
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
