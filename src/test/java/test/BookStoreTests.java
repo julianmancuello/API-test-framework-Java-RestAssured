@@ -33,7 +33,7 @@ public class BookStoreTests extends BaseSetUp {
         BookStore bookStore = bookStoreApi.getAllBooks();
 
         assertEquals(ALL_BOOKS, bookStore, "FAILED: The retrieved books do not match the expected books");
-        info("SUCCESS: The retrieved books matches the expected books");
+        info("SUCCESS: The retrieved books match the expected books");
     }
 
     @Tag("regression")

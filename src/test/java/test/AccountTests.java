@@ -65,7 +65,7 @@ public class AccountTests extends BaseSetUp {
         info("Deleting a user");
         info("Precondition: Create a new user to delete it");
         UserWithTypo newUser = accountApi.createNewRandomUser();
-        info("User created, proceeding to delete it");
+        info("User " + newUser.getUsername() + " was created, proceeding to delete it");
         Response response = accountApi.deleteUser(DISPOSABLE_USER);
 
         assertTrue(response.getBody().asString().isEmpty(), "FAILED: The response body is not empty");
