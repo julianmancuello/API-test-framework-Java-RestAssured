@@ -57,9 +57,6 @@ public class AccountTests extends BaseSetUp {
 
         assertEquals(NEW_USER_INF, newUser, "FAILED: The response body when creating a new user does not match the expected data");
         info("SUCCESS: The response body when creating a new user matches the expected data");
-        info(newUser.getUsername());
-        info(newUser.getUserId());
-        info(String.valueOf(NEW_USER_INF));
     }
 
     @Tag("regression")
@@ -69,12 +66,9 @@ public class AccountTests extends BaseSetUp {
         info("Precondition: Create a new user to delete it");
         UserWithTypo newUser = accountApi.createNewRandomUser();
         info("User created, proceeding to delete it");
-        info(String.valueOf(DISPOSABLE_USER));
         Response response = accountApi.deleteUser(DISPOSABLE_USER);
 
         assertTrue(response.getBody().asString().isEmpty(), "FAILED: The response body is not empty");
         info("SUCCESS: The response body is empty");
-        info(newUser.getUsername());
-        info(newUser.getUserId());
     }
 }
