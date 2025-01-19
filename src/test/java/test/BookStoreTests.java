@@ -4,8 +4,7 @@ import clients.BookStoreApi;
 import models.responses.Book;
 import models.responses.BookStore;
 import models.responses.Message;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import setup.BaseSetUp;
@@ -16,7 +15,6 @@ import static common.Utils.generateRandomIsbn;
 import static data.TestData.ALL_BOOKS;
 import static data.TestData.ERROR_INVALID_ISBN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class BookStoreTests extends BaseSetUp {
 
@@ -28,6 +26,7 @@ public class BookStoreTests extends BaseSetUp {
         divider();
     }
 
+    @Tag("smoke")
     @Test
     public void testGetAllBooksSuccessfully() {
         info("Getting all books");
@@ -37,6 +36,7 @@ public class BookStoreTests extends BaseSetUp {
         info("SUCCESS: The retrieved books matches the expected books");
     }
 
+    @Tag("regression")
     @ParameterizedTest(name = "Test Book {index}")
     @MethodSource(value = "data.DataProviders#dataBooks")
     public void testGetBookByIsbnWithExistingIsbn(Book bookTest) {
@@ -47,6 +47,7 @@ public class BookStoreTests extends BaseSetUp {
         info("SUCCESS: The book data in the response matches the expected data.");
     }
 
+    @Tag("regression")
     @Test
     public void testGetBookByIsbnWithInvalidIsbn() {
         String invalidIsbn = generateRandomIsbn();

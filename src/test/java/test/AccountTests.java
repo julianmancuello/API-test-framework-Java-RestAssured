@@ -27,6 +27,7 @@ public class AccountTests extends BaseSetUp {
         divider();
     }
 
+    @Tag("smoke")
     @ParameterizedTest
     @MethodSource(value = "data.DataProviders#dataUsersInformation")
     public void testGetUserInformation(UserType userType, User userTest) {
@@ -37,6 +38,7 @@ public class AccountTests extends BaseSetUp {
         info("SUCCESS: " + user.getUsername() + " information in the response matches the expected data.");
     }
 
+    @Tag("smoke")
     @ParameterizedTest
     @MethodSource(value = "data.DataProviders#dataUsers")
     public void testGetUserInformationWithoutToken(UserType userType) {
@@ -47,6 +49,7 @@ public class AccountTests extends BaseSetUp {
         info("SUCCESS: The error message data in the response when trying to get " + userType + " information matches the expected data.");
     }
 
+    @Tag("regression")
     @Test
     public void testCreateNewUserSuccessfully() {
         info("Creating a new user");
@@ -56,6 +59,7 @@ public class AccountTests extends BaseSetUp {
         info("SUCCESS: The response body when creating a new user matches the expected data");
     }
 
+    @Tag("regression")
     @Test
     public void testDeleteUser() {
         info("Deleting a user");

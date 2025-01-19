@@ -1,0 +1,40 @@
+# .github/workflows/pipeline.yml
+name: Github Actions Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '20'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean install -DskipTests=true
+
+      - name: Run smoke tests
+        run: mvn clean test -Dgroups=smoke
+
+      - name: Run regression tests
+        run: mvn clean test -Dgroups=regression
+
+      - name: Set up Git user
+        if: github.event_name == 'push'
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
