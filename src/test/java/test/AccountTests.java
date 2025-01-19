@@ -57,6 +57,8 @@ public class AccountTests extends BaseSetUp {
 
         assertEquals(NEW_USER_INF, newUser, "FAILED: The response body when creating a new user does not match the expected data");
         info("SUCCESS: The response body when creating a new user matches the expected data");
+        info(newUser.getUsername());
+        info(newUser.getUserId());
     }
 
     @Tag("regression")
@@ -70,5 +72,7 @@ public class AccountTests extends BaseSetUp {
 
         assertTrue(response.getBody().asString().isEmpty(), "FAILED: The response body is not empty");
         info("SUCCESS: The response body is empty");
+        info(newUser.getUsername());
+        info(newUser.getUserId());
     }
 }
