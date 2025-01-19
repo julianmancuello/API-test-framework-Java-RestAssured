@@ -59,6 +59,7 @@ public class AccountTests extends BaseSetUp {
         info("SUCCESS: The response body when creating a new user matches the expected data");
         info(newUser.getUsername());
         info(newUser.getUserId());
+        info(String.valueOf(NEW_USER_INF));
     }
 
     @Tag("regression")
