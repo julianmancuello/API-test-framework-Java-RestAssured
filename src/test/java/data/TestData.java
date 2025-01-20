@@ -1,10 +1,15 @@
 package data;
 
 import context.ContextStore;
+import models.requests.Isbn;
 import models.responses.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static common.LoggerUtils.*;
+import static common.Utils.*;
 
 public class TestData {
     //Books
@@ -24,4 +29,14 @@ public class TestData {
     public static final User MAIN_USER_INF = new User(ContextStore.get("main-user-id"), ContextStore.get("main-user"), Arrays.asList(BOOK2, BOOK3, BOOK1));
     public static final User EMPTY_USER_INF = new User(ContextStore.get("empty-user-id"), ContextStore.get("empty-user"), List.of());
     public static final UserWithTypo NEW_USER_INF = new UserWithTypo(ContextStore.get("newUserId"), ContextStore.get("newUsername"), List.of());
+
+    public static List<Isbn> selectRandomListOfIsbns() {
+        List<Isbn> listOfIsbns = new ArrayList<>();
+        int numberOfBooks = ALL_BOOKS.getBooks().size();
+        List<Integer> indexes = generateRandomListOfIndexes(generateRandomPositiveInteger(numberOfBooks), numberOfBooks, true);
+        for (Integer index : indexes) {
+            listOfIsbns.add(new Isbn(ALL_BOOKS.getBooks().get(index).getIsbn()));
+        }
+        return listOfIsbns;
+    }
 }

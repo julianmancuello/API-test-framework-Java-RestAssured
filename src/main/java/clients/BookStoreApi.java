@@ -1,9 +1,16 @@
 package clients;
 
+import context.ContextStore;
+import models.requests.AddBooks;
+import models.requests.Isbn;
+import models.responses.AddedBooks;
 import models.responses.Book;
 import models.responses.BookStore;
 import models.responses.Message;
 
+import java.util.List;
+
+import static common.Authentication.*;
 import static common.Endpoints.BOOKS_ENDPOINT;
 import static common.Endpoints.BOOK_ENDPOINT;
 import static io.restassured.RestAssured.given;
@@ -41,5 +48,15 @@ public class BookStoreApi extends BaseApi {
                 .get(BOOK_ENDPOINT)
                 .then().statusCode(400)
                 .extract().body().as(Message.class);
+    }
+
+    public AddedBooks addBooksToCollection(UserType userType, List<Isbn> listOfIsbns) {
+        return given()
+                .spec(getRequestSpecWithAuth(userType))
+                .body(new AddBooks(ContextStore.get("testUserId"), listOfIsbns))
+                .when()
+                .post(BOOKS_ENDPOINT)
+                .then().statusCode(201)
+                .extract().body().as(AddedBooks.class);
     }
 }

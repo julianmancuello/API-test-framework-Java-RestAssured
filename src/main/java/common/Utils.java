@@ -3,6 +3,10 @@ package common;
 import context.ContextStore;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static common.Authentication.*;
 import static common.LoggerUtils.info;
@@ -77,6 +81,34 @@ public class Utils {
 
     public static char getRandomCharacter(String characters) {
         return characters.charAt(random.nextInt(characters.length()));
+    }
+
+    public static List<Integer> generateRandomListOfNumbers(int sizeList, int lowerBound, int upperBound, boolean uniqueValues) {
+        List<Integer> resultList = new ArrayList<>();
+
+        if (uniqueValues) {
+            if (upperBound - lowerBound + 1 < sizeList) {
+                throw new IllegalArgumentException("The range is insufficient to generate a list without repeated values.");
+            }
+            Set<Integer> uniqueValuesSet = new HashSet<>();
+            while (uniqueValuesSet.size() < sizeList) {
+                uniqueValuesSet.add(generateRandomNumberBetween(lowerBound, upperBound));
+            }
+            resultList.addAll(uniqueValuesSet);
+        } else {
+            for (int i = 0; i < sizeList; i++) {
+                resultList.add(generateRandomNumberBetween(lowerBound, upperBound));
+            }
+        }
+        return resultList;
+    }
+
+    public static List<Integer> generateRandomListOfIndexes(int numberOfIndexes, int upperBoundExcluded, boolean uniqueIndexes) {
+        return generateRandomListOfNumbers(numberOfIndexes, 0, upperBoundExcluded - 1, uniqueIndexes);
+    }
+
+    public static int generateRandomPositiveInteger(int bound) {
+        return random.nextInt(bound) + 1;
     }
 
     public static void storeInContextAndLogInConsole(String key, Object value) {

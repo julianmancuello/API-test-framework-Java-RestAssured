@@ -1,6 +1,8 @@
 package test;
 
 import clients.BookStoreApi;
+import models.requests.Isbn;
+import models.responses.AddedBooks;
 import models.responses.Book;
 import models.responses.BookStore;
 import models.responses.Message;
@@ -9,11 +11,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import setup.BaseSetUp;
 
+import java.util.List;
+
+import static common.Authentication.UserType.*;
 import static common.LoggerUtils.divider;
 import static common.LoggerUtils.info;
 import static common.Utils.generateRandomIsbn;
-import static data.TestData.ALL_BOOKS;
-import static data.TestData.ERROR_INVALID_ISBN;
+import static data.TestData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BookStoreTests extends BaseSetUp {
@@ -56,5 +60,16 @@ public class BookStoreTests extends BaseSetUp {
 
         assertEquals(ERROR_INVALID_ISBN, messageResult, "FAILED: The error message data in the response does not match the expected data");
         info("SUCCESS: The error message data in the response matches the expected data.");
+    }
+
+    @Test
+    public void testAddBooksToCollectionSuccessfully() {
+        info("Adding books to the user's collection");
+        List<Isbn> listOfIsbns = selectRandomListOfIsbns();
+        AddedBooks addedBooks = bookStoreApi.addBooksToCollection(RESETED_USER, listOfIsbns);
+
+        info("Added books: " + listOfIsbns);
+        assertEquals(listOfIsbns, addedBooks.getBooks(), "FAILED: The added books do not match the list of selected books");
+        info("SUCCESS: The added books match the list of selected books");
     }
 }

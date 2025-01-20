@@ -15,7 +15,9 @@ public class Authentication {
     public enum UserType {
         MAIN_USER,
         EMPTY_USER,
-        DISPOSABLE_USER
+        DISPOSABLE_USER,
+        FULL_BOOKS_USER,
+        RESETED_USER
     }
 
     public static Credentials userCredentials(UserType userType) {
@@ -28,7 +30,9 @@ public class Authentication {
             case MAIN_USER -> setTestUser(ContextStore.get("main-user"), ContextStore.get("main-password"), ContextStore.get("main-user-id"));
             case EMPTY_USER -> setTestUser(ContextStore.get("empty-user"), ContextStore.get("empty-password"), ContextStore.get("empty-user-id"));
             case DISPOSABLE_USER -> setTestUser(ContextStore.get("newUsername"), ContextStore.get("newPassword"), ContextStore.get("newUserId"));
-        };
+            case FULL_BOOKS_USER -> setTestUser(ContextStore.get("full-books-user"), ContextStore.get("full-books-password"), ContextStore.get("full-books-user-id"));
+            case RESETED_USER -> setTestUser(ContextStore.get("reseted-user"), ContextStore.get("reseted-password"), ContextStore.get("reseted-user-id"));
+        }
     }
 
     public static void setTestUser(String user, String password, String userId) {
