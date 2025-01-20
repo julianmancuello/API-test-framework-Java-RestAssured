@@ -69,6 +69,6 @@ public class AccountTests extends BaseSetUp {
         Response response = accountApi.deleteUser(DISPOSABLE_USER);
 
         assertTrue(response.getBody().asString().isEmpty(), "FAILED: The response body is not empty");
-        info("SUCCESS: The response body is empty");
+        info("SUCCESS: The response body is empty. User was deleted");
     }
 }

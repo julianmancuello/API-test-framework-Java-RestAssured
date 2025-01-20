@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static common.LoggerUtils.*;
 import static common.Utils.*;
 
 public class TestData {
@@ -38,5 +37,13 @@ public class TestData {
             listOfIsbns.add(new Isbn(ALL_BOOKS.getBooks().get(index).getIsbn()));
         }
         return listOfIsbns;
+    }
+
+    public static List<Isbn> listAllIsbns() {
+        List<Isbn> allIsbns = new ArrayList<>();
+        for (Book book : ALL_BOOKS.getBooks()) {
+            allIsbns.add(new Isbn(book.getIsbn()));
+        }
+        return allIsbns;
     }
 }

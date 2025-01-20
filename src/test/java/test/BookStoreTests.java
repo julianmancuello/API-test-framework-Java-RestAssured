@@ -51,7 +51,7 @@ public class BookStoreTests extends BaseSetUp {
         info("SUCCESS: The book data in the response matches the expected data.");
     }
 
-    @Tag("regression")
+    @Tag("smoke")
     @Test
     public void testGetBookByIsbnWithInvalidIsbn() {
         String invalidIsbn = generateRandomIsbn();
@@ -62,6 +62,7 @@ public class BookStoreTests extends BaseSetUp {
         info("SUCCESS: The error message data in the response matches the expected data.");
     }
 
+    @Tag("regression")
     @Test
     public void testAddBooksToCollectionSuccessfully() {
         info("Adding books to the user's collection");
@@ -76,10 +77,19 @@ public class BookStoreTests extends BaseSetUp {
         info("All books deleted");
     }
 
+    @Tag("regression")
     @Test
-    public void testDeleteAll() {
+    public void testDeleteAllBooksFromCollectionSuccessfully() {
+        info("Deleting all books from the user's collection");
+        int numberOfBooks = container.provideAccountApi().getUser(FULL_BOOKS_USER).getBooks().size();
+        info("Before running the API, the user had " + numberOfBooks + " books in the collection");
         Response response = bookStoreApi.deleteAllBooksFromCollection(FULL_BOOKS_USER);
 
-        assertTrue(response.getBody().asString().isEmpty(), "FAILED: The response body is not empty");;
+        assertTrue(response.getBody().asString().isEmpty(), "FAILED: The response body is not empty");
+        int updatedNumberOfBooks = container.provideAccountApi().getUser(FULL_BOOKS_USER).getBooks().size();
+        info("SUCCESS: The user have " + updatedNumberOfBooks + " books in the collection, all the books were deleted");
+        info("Resetting user, adding all books again");
+        bookStoreApi.addBooksToCollection(FULL_BOOKS_USER, listAllIsbns());
+        info("All books added again");
     }
 }
