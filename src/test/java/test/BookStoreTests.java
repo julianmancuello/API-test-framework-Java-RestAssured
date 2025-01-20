@@ -1,11 +1,10 @@
 package test;
 
 import clients.BookStoreApi;
+import context.ContextStore;
+import io.restassured.response.Response;
 import models.requests.Isbn;
-import models.responses.AddedBooks;
-import models.responses.Book;
-import models.responses.BookStore;
-import models.responses.Message;
+import models.responses.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -19,6 +18,7 @@ import static common.LoggerUtils.info;
 import static common.Utils.generateRandomIsbn;
 import static data.TestData.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BookStoreTests extends BaseSetUp {
 
@@ -71,5 +71,15 @@ public class BookStoreTests extends BaseSetUp {
         info("Added books: " + listOfIsbns);
         assertEquals(listOfIsbns, addedBooks.getBooks(), "FAILED: The added books do not match the list of selected books");
         info("SUCCESS: The added books match the list of selected books");
+        info("Resetting user, deleting all books");
+        bookStoreApi.deleteAllBooksFromCollection(RESETED_USER);
+        info("All books deleted");
+    }
+
+    @Test
+    public void testDeleteAll() {
+        Response response = bookStoreApi.deleteAllBooksFromCollection(FULL_BOOKS_USER);
+
+        assertTrue(response.getBody().asString().isEmpty(), "FAILED: The response body is not empty");;
     }
 }

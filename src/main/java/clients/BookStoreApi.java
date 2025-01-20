@@ -1,6 +1,7 @@
 package clients;
 
 import context.ContextStore;
+import io.restassured.response.Response;
 import models.requests.AddBooks;
 import models.requests.Isbn;
 import models.responses.AddedBooks;
@@ -11,8 +12,8 @@ import models.responses.Message;
 import java.util.List;
 
 import static common.Authentication.*;
-import static common.Endpoints.BOOKS_ENDPOINT;
-import static common.Endpoints.BOOK_ENDPOINT;
+import static common.Endpoints.*;
+import static common.Utils.getTestUserId;
 import static io.restassured.RestAssured.given;
 
 public class BookStoreApi extends BaseApi {
@@ -58,5 +59,15 @@ public class BookStoreApi extends BaseApi {
                 .post(BOOKS_ENDPOINT)
                 .then().statusCode(201)
                 .extract().body().as(AddedBooks.class);
+    }
+
+    public Response deleteAllBooksFromCollection(UserType userType) {
+        return given()
+                .spec(getRequestSpecWithAuth(userType))
+                .param("UserId", getTestUserId())
+                .when()
+                .delete(BOOKS_ENDPOINT)
+                .then().statusCode(204)
+                .extract().response();
     }
 }
