@@ -8,6 +8,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
+import static clients.BaseApi.resetToken;
+
 public class BaseSetUp {
 
     protected DependencyContainer container;
@@ -33,5 +35,6 @@ public class BaseSetUp {
     @AfterEach
     public void tearDown() {
         ContextStore.clear();
+        resetToken();
     }
 }

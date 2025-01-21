@@ -12,6 +12,7 @@ import static common.Endpoints.BASE_URI;
 public class BaseApi {
 
     private RequestSpecification requestSpec;
+    private static String token;
 
     public BaseApi() {
         requestSpec = new RequestSpecBuilder()
@@ -21,10 +22,17 @@ public class BaseApi {
     }
 
     public RequestSpecification getRequestSpecWithAuth(UserType userType) {
+        if (token == null) {
+            token = generateToken(userType);
+        }
         return requestSpec = new RequestSpecBuilder()
                 .setBaseUri(BASE_URI)
                 .setContentType("application/json")
-                .addHeader("Authorization", "Bearer " + generateToken(userType))
+                .addHeader("Authorization", "Bearer " + token)
                 .build();
+    }
+
+    public static void resetToken() {
+        token = null;
     }
 }
