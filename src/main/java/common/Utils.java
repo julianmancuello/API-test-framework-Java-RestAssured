@@ -8,8 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static common.Authentication.*;
-import static common.LoggerUtils.info;
+import static common.Authentication.UserType;
 
 public class Utils {
 
@@ -17,7 +16,7 @@ public class Utils {
     private static final String LOWERCASE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
     private static final String DIGIT_CHARACTERS = "0123456789";
     private static final String SPECIAL_CHARACTERS = "!@#$%^&*";
-    private static final String ALPHANUMERIC_CHARACTERS =  UPPERCASE_CHARACTERS + LOWERCASE_CHARACTERS + DIGIT_CHARACTERS;
+    private static final String ALPHANUMERIC_CHARACTERS = UPPERCASE_CHARACTERS + LOWERCASE_CHARACTERS + DIGIT_CHARACTERS;
     private static final SecureRandom random = new SecureRandom();
 
     public static String generateRandomIsbn() {

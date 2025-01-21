@@ -5,17 +5,20 @@ import io.restassured.response.Response;
 import models.responses.Message;
 import models.responses.User;
 import models.responses.UserWithTypo;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import setup.BaseSetUp;
 
-import static common.Authentication.*;
-import static common.Authentication.UserType.*;
+import static common.Authentication.UserType;
+import static common.Authentication.UserType.DISPOSABLE_USER;
 import static common.LoggerUtils.divider;
 import static common.LoggerUtils.info;
 import static data.TestData.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AccountTests extends BaseSetUp {
 

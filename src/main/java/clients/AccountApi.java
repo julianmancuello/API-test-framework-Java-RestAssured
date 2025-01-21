@@ -7,10 +7,11 @@ import models.responses.Message;
 import models.responses.User;
 import models.responses.UserWithTypo;
 
-import static common.Authentication.*;
+import static common.Authentication.UserType;
 import static common.Endpoints.USER_ENDPOINT;
 import static common.Endpoints.USER_ID_ENDPOINT;
-import static common.Utils.*;
+import static common.Utils.getTestUserId;
+import static common.Utils.loadUserId;
 import static io.restassured.RestAssured.given;
 
 public class AccountApi extends BaseApi {

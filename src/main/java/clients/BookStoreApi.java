@@ -11,8 +11,9 @@ import models.responses.Message;
 
 import java.util.List;
 
-import static common.Authentication.*;
-import static common.Endpoints.*;
+import static common.Authentication.UserType;
+import static common.Endpoints.BOOKS_ENDPOINT;
+import static common.Endpoints.BOOK_ENDPOINT;
 import static common.Utils.getTestUserId;
 import static io.restassured.RestAssured.given;
 

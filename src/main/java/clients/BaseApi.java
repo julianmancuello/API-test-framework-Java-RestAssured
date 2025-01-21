@@ -4,7 +4,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
 
-import static common.Authentication.*;
+import static common.Authentication.UserType;
 import static common.Authentication.generateToken;
 import static common.Endpoints.BASE_URI;
 

@@ -3,15 +3,21 @@ package test;
 import clients.BookStoreApi;
 import io.restassured.response.Response;
 import models.requests.Isbn;
-import models.responses.*;
-import org.junit.jupiter.api.*;
+import models.responses.AddedBooks;
+import models.responses.Book;
+import models.responses.BookStore;
+import models.responses.Message;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import setup.BaseSetUp;
 
 import java.util.List;
 
-import static common.Authentication.UserType.*;
+import static common.Authentication.UserType.FULL_BOOKS_USER;
+import static common.Authentication.UserType.RESETED_USER;
 import static common.LoggerUtils.divider;
 import static common.LoggerUtils.info;
 import static common.Utils.generateRandomIsbn;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static common.Authentication.*;
+import static common.Authentication.UserType;
 import static common.Utils.*;
 
 public class TestData {

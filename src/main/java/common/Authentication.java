@@ -27,11 +27,16 @@ public class Authentication {
 
     public static void loadUserCredentials(UserType userType) {
         switch (userType) {
-            case MAIN_USER -> setTestUser(ContextStore.get("main-user"), ContextStore.get("main-password"), ContextStore.get("main-user-id"));
-            case EMPTY_USER -> setTestUser(ContextStore.get("empty-user"), ContextStore.get("empty-password"), ContextStore.get("empty-user-id"));
-            case DISPOSABLE_USER -> setTestUser(ContextStore.get("newUsername"), ContextStore.get("newPassword"), ContextStore.get("newUserId"));
-            case FULL_BOOKS_USER -> setTestUser(ContextStore.get("full-books-user"), ContextStore.get("full-books-password"), ContextStore.get("full-books-user-id"));
-            case RESETED_USER -> setTestUser(ContextStore.get("reseted-user"), ContextStore.get("reseted-password"), ContextStore.get("reseted-user-id"));
+            case MAIN_USER ->
+                    setTestUser(ContextStore.get("main-user"), ContextStore.get("main-password"), ContextStore.get("main-user-id"));
+            case EMPTY_USER ->
+                    setTestUser(ContextStore.get("empty-user"), ContextStore.get("empty-password"), ContextStore.get("empty-user-id"));
+            case DISPOSABLE_USER ->
+                    setTestUser(ContextStore.get("newUsername"), ContextStore.get("newPassword"), ContextStore.get("newUserId"));
+            case FULL_BOOKS_USER ->
+                    setTestUser(ContextStore.get("full-books-user"), ContextStore.get("full-books-password"), ContextStore.get("full-books-user-id"));
+            case RESETED_USER ->
+                    setTestUser(ContextStore.get("reseted-user"), ContextStore.get("reseted-password"), ContextStore.get("reseted-user-id"));
         }
     }
 

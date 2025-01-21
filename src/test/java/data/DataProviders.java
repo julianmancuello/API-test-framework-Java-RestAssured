@@ -6,11 +6,11 @@ import org.junit.jupiter.params.provider.Arguments;
 import java.util.Arrays;
 import java.util.List;
 
-import static common.Authentication.*;
+import static common.Authentication.UserType;
 import static common.Authentication.UserType.EMPTY_USER;
 import static common.Authentication.UserType.MAIN_USER;
 import static data.TestData.*;
-import static org.junit.jupiter.params.provider.Arguments.*;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class DataProviders {
 
