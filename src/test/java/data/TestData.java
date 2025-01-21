@@ -1,6 +1,7 @@
 package data;
 
 import context.ContextStore;
+import models.requests.Credentials;
 import models.requests.Isbn;
 import models.responses.*;
 import setup.DependencyContainer;
@@ -29,7 +30,6 @@ public class TestData {
     //User's information
     public static final User MAIN_USER_INF = new User(ContextStore.get("main-user-id"), ContextStore.get("main-user"), Arrays.asList(BOOK2, BOOK3, BOOK4));
     public static final User EMPTY_USER_INF = new User(ContextStore.get("empty-user-id"), ContextStore.get("empty-user"), List.of());
-    public static final UserWithTypo NEW_USER_INF = new UserWithTypo(ContextStore.get("newUserId"), ContextStore.get("newUsername"), List.of());
 
     public static List<Isbn> selectRandomListOfIsbns() {
         List<Isbn> listOfIsbns = new ArrayList<>();
@@ -51,5 +51,17 @@ public class TestData {
 
     public static int getNumberOfBooksOfUser(UserType userType) {
         return new DependencyContainer().provideAccountApi().getUser(userType).getBooks().size();
+    }
+
+    public static Credentials createNewRandomUser() {
+        String newUsername = generateRandomUser();
+        String newPassword = generateRandomPassword();
+        ContextStore.put("newUsername", newUsername);
+        ContextStore.put("newPassword", newPassword);
+        return new Credentials(newUsername, newPassword);
+    }
+
+    public static UserWithTypo getNewUserInf() {
+        return new UserWithTypo(ContextStore.get("newUserId"), ContextStore.get("newUsername"), List.of());
     }
 }

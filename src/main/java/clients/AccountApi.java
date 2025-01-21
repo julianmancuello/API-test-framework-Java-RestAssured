@@ -40,24 +40,16 @@ public class AccountApi extends BaseApi {
                 .extract().body().as(Message.class);
     }
 
-    public UserWithTypo createUser(String newUsername, String newPassword) {
-        return given()
+    public UserWithTypo createUser(Credentials credentials) {
+        UserWithTypo newUser = given()
                 .spec(getRequestSpec())
-                .body(new Credentials(newUsername, newPassword))
+                .body(credentials)
                 .when()
                 .post(USER_ENDPOINT)
                 .then().statusCode(201)
                 .extract().body().as(UserWithTypo.class);
-    }
-
-    public UserWithTypo createNewRandomUser() {
-        String newUsername = generateRandomUser();
-        String newPassword = generateRandomPassword();
-        ContextStore.put("newUsername", newUsername);
-        ContextStore.put("newPassword", newPassword);
-        UserWithTypo newRandomUser = createUser(newUsername, newPassword);
-        ContextStore.put("newUserId", newRandomUser.getUserId());
-        return newRandomUser;
+        ContextStore.put("newUserId", newUser.getUserId());
+        return newUser;
     }
 
     public Response deleteUser(UserType userType) {

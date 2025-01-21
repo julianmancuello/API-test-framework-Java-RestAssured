@@ -53,9 +53,9 @@ public class AccountTests extends BaseSetUp {
     @Test
     public void testCreateNewUserSuccessfully() {
         info("Creating a new user");
-        UserWithTypo newUser = accountApi.createNewRandomUser();
+        UserWithTypo newUser = accountApi.createUser(createNewRandomUser());
 
-        assertEquals(NEW_USER_INF, newUser, "FAILED: The response body when creating a new user does not match the expected data");
+        assertEquals(getNewUserInf(), newUser, "FAILED: The response body when creating a new user does not match the expected data");
         info("SUCCESS: The response body when creating a new user matches the expected data");
     }
 
@@ -64,7 +64,7 @@ public class AccountTests extends BaseSetUp {
     public void testDeleteUser() {
         info("Deleting a user");
         info("Precondition: Create a new user to delete it");
-        UserWithTypo newUser = accountApi.createNewRandomUser();
+        UserWithTypo newUser = accountApi.createUser(createNewRandomUser());
         info("User " + newUser.getUsername() + " was created, proceeding to delete it");
         Response response = accountApi.deleteUser(DISPOSABLE_USER);
 
