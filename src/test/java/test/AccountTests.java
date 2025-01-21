@@ -45,8 +45,8 @@ public class AccountTests extends BaseSetUp {
         info("Testing to get a user without token");
         Message messageResult = accountApi.getUserWithoutToken(userType);
 
-        assertEquals(ERROR_UNAUTHORIZED_USER, messageResult, "FAILED: The error message data in the response when trying to get " + userType + " information does not match the expected data");
-        info("SUCCESS: The error message data in the response when trying to get " + userType + " information matches the expected data.");
+        assertEquals(ERROR_UNAUTHORIZED_USER, messageResult, "FAILED: The error message data in the response when trying to get " + userType + " information without token does not match the expected data");
+        info("SUCCESS: The error message data in the response when trying to get " + userType + " information without token matches the expected data.");
     }
 
     @Tag("regression")

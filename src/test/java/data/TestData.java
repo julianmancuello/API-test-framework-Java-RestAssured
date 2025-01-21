@@ -3,11 +3,13 @@ package data;
 import context.ContextStore;
 import models.requests.Isbn;
 import models.responses.*;
+import setup.DependencyContainer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static common.Authentication.*;
 import static common.Utils.*;
 
 public class TestData {
@@ -45,5 +47,9 @@ public class TestData {
             allIsbns.add(new Isbn(book.getIsbn()));
         }
         return allIsbns;
+    }
+
+    public static int getNumberOfBooksOfUser(UserType userType) {
+        return new DependencyContainer().provideAccountApi().getUser(userType).getBooks().size();
     }
 }
