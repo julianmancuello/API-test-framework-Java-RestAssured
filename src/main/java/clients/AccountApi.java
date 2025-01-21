@@ -53,10 +53,10 @@ public class AccountApi extends BaseApi {
     public UserWithTypo createNewRandomUser() {
         String newUsername = generateRandomUser();
         String newPassword = generateRandomPassword();
-        storeInContextAndLogInConsole("newUsername", newUsername);
-        storeInContextAndLogInConsole("newPassword", newPassword);
+        ContextStore.put("newUsername", newUsername);
+        ContextStore.put("newPassword", newPassword);
         UserWithTypo newRandomUser = createUser(newUsername, newPassword);
-        storeInContextAndLogInConsole("newUserId", newRandomUser.getUserId());
+        ContextStore.put("newUserId", newRandomUser.getUserId());
         return newRandomUser;
     }
 

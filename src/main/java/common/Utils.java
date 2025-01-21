@@ -110,9 +110,4 @@ public class Utils {
     public static int generateRandomPositiveInteger(int bound) {
         return random.nextInt(bound) + 1;
     }
-
-    public static void storeInContextAndLogInConsole(String key, Object value) {
-        ContextStore.put(key, value);
-        info(key + ": " + value);
-    }
 }
