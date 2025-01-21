@@ -27,7 +27,7 @@ public class TestData {
     public static final Message ERROR_INVALID_ISBN = new Message(1205, "ISBN supplied is not available in Books Collection!");
     public static final Message ERROR_UNAUTHORIZED_USER = new Message(1200, "User not authorized!");
     //User's information
-    public static final User MAIN_USER_INF = new User(ContextStore.get("main-user-id"), ContextStore.get("main-user"), Arrays.asList(BOOK2, BOOK3, BOOK1));
+    public static final User MAIN_USER_INF = new User(ContextStore.get("main-user-id"), ContextStore.get("main-user"), Arrays.asList(BOOK2, BOOK3, BOOK4));
     public static final User EMPTY_USER_INF = new User(ContextStore.get("empty-user-id"), ContextStore.get("empty-user"), List.of());
     public static final UserWithTypo NEW_USER_INF = new UserWithTypo(ContextStore.get("newUserId"), ContextStore.get("newUsername"), List.of());
 
