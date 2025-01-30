@@ -1,4 +1,4 @@
-# API Test Framework: Java, REST Assured, JUnit 5
+# API Test Framework: Java, REST Assured and JUnit 5
 
 ## Description
 
@@ -78,7 +78,7 @@ mvn clean test
 ```bash
 mvn test
 ```
-- Run only smoke tests:
+- Run smoke tests:
 ```bash
 mvn test -Dgroups=smoke
 ```
