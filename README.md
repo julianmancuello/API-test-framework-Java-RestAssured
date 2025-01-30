@@ -43,7 +43,7 @@ This project is an API test automation framework developed in Java, using REST A
             |-- tests
         |-- resources
 ```
-- **main/java/clients:** Contains classes that abstract API operations, such as methods for retrieving and manipulating resources (e.g., getUser() in user APIs).
+- **main/java/clients:** Contains classes that abstract API operations, such as methods for retrieving and manipulating resources.
 
 - **main/java/common:** Utility classes shared across tests.
 
