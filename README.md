@@ -10,7 +10,7 @@ This project is an API test automation framework developed in Java, using REST A
 
 - **Data sharing:** Context management for sharing variables across tests.
 
-- **Serialization and deserialization:** POJO-based handling of API responses.
+- **Serialization and deserialization:** POJO-based handling of API requests and responses.
 
 - **API client abstraction:** Centralized methods for API operations.
 
